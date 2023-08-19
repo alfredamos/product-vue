@@ -6,12 +6,16 @@ interface Props{
 }
 
 const props = defineProps<Props>()
-const emit = defineEmits(['onAddToCart'])
+const emit = defineEmits(['onAddToCart', 'onBackToList'])
 
 const addToCart = (id: string) => {
+  console.log("In detail-product-child, id : ", id)
   emit('onAddToCart', id)
 }
 
+const backToList = () => {
+  emit('onBackToList')
+}
 </script>
 
 <template>
@@ -34,11 +38,12 @@ const addToCart = (id: string) => {
       </div>
       <div class="card-footer">
         <button
+        type="button"
           @click="addToCart(props.product.id!)"
           class="btn btn-outline-secondary form-control shadow-sm fw-bold"
         >
           Add to Cart
-        </button>
+        </button>        
       </div>
     </div>
 

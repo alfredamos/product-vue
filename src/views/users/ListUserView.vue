@@ -18,6 +18,10 @@ const detailUser = (id: string) => {
 const editUser = (id: string) => {
   router.push(`/users/edit/${id}`);
 };
+const makeAdminUser = (id: string) => {
+  router.push(`/users/make-admin/${id}`);
+};
+
 </script>
 
 <template>
@@ -25,10 +29,11 @@ const editUser = (id: string) => {
     <div class="row">
       <div class="col-sm-6 mt-5">
         <users-table
-          :users="resource.users!"
+          :users="resource.users!"          
           @on-delete-user="deleteUser"
           @on-detail-user="detailUser"
           @on-edit-user="editUser"
+          @on-make-admin-user="makeAdminUser"
         />
       </div>
       <div class="col-sm-6">
@@ -37,4 +42,3 @@ const editUser = (id: string) => {
     </div>
   </div>
 </template>
-../models/users/user-api-results.model

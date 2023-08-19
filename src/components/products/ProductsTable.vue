@@ -1,34 +1,39 @@
 <script lang="ts" setup>
-import type UserDto from "../models/auth/user.model";
+import type ProductDto from "@/models/products/product.model";
 
 interface Props {
-  users: UserDto[];
+  products: ProductDto[];
 }
 
 const props = defineProps<Props>();
 
-const emit = defineEmits(["onEditUser", "onDeleteUser", "onDetailUser", "onMakeAdminUser"]);
+const emit = defineEmits([
+  "onEditProduct",
+  "onDeleteProduct",
+  "onDetailProduct",
+  "onFeatureProduct",
+]);
 
-const deleteUser = (id: string) => {
-  emit("onDeleteUser", id);
+const deleteProduct = (id: string) => {
+  emit("onDeleteProduct", id);
 };
-const detailUser = (id: string) => {
-  emit("onDetailUser", id);
-};
-
-const editUser = (id: string) => {
-  emit("onEditUser", id);
+const detailProduct = (id: string) => {
+  emit("onDetailProduct", id);
 };
 
-const makeAdminUser = (id: string) => {
-  emit("onMakeAdminUser", id);
+const editProduct = (id: string) => {
+  emit("onEditProduct", id);
+};
+
+const featureProduct = (id: string) => {
+  emit("onFeatureProduct", id);
 };
 </script>
 
 <template>
   <div class="card">
     <div class="card-header bg-primary text-white p-3">
-      <h4 class="text-center">User List</h4>
+      <h4 class="text-center">Product List</h4>
     </div>
     <div class="card-body">
       <table class="table table-responsive table-striped table-bordered">
@@ -39,36 +44,36 @@ const makeAdminUser = (id: string) => {
           </tr>
         </thead>
         <tbody>
-          <tr v-for="user in props.users">
-            <td>{{ user.name }}</td>
+          <tr v-for="product in props.products">
+            <td>{{ product.name }}</td>
             <td>
               <button
               type="button"
-                @click="detailUser(user.id!)"
+                @click="detailProduct(product.id!)"
                 class="btn btn-outline-primary m-1 btn-sm fw-bold"
               >
                 View
               </button>
               <button
               type="button"
-                @click="deleteUser(user.id!)"
+                @click="deleteProduct(product.id!)"
                 class="btn btn-outline-danger m-1 btn-sm fw-bold"
               >
                 Delete
               </button>
               <button
               type="button"
-                @click="editUser(user.id!)"
+                @click="editProduct(product.id!)"
                 class="btn btn-outline-secondary m-1 btn-sm fw-bold"
               >
                 Edit
               </button>
               <button
               type="button"
-                @click="makeAdminUser(user.id!)"
+                @click="featureProduct(product.id!)"
                 class="btn btn-outline-dark m-1 btn-sm fw-bold"
               >
-                Role
+                Feature
               </button>
             </td>
           </tr>
@@ -79,16 +84,16 @@ const makeAdminUser = (id: string) => {
       class="card-footer d-flex flex-column align-items-center justify-content-center p-3"
     >
       <RouterLink
-        to="/users/create"
+        to="/list-product/create"
         class="btn btn-outline-secondary btn-lg form-control fw-bold"
       >
-        Create User
-      </RouterLink>
+        Create Product
+      </RouterLink>      
       <RouterLink
         to="/admin-panel"
         class="btn btn-outline-primary btn-lg form-control fw-bold"
       >
-        Back To Admin Panel
+        Back to Admin Panel
       </RouterLink>
     </div>
   </div>

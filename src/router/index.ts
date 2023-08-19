@@ -12,14 +12,19 @@ import CreateUserView from "../views/users/CreateUserView.vue";
 import DeleteUserView from "../views/users/DeleteUserView.vue";
 import DetailUserView from "../views/users/DetailUserView.vue";
 import EditUserView from "../views/users/EditUserView.vue";
-import HomeView from "../views/auth/HomeView.vue"
+import HomeView from "../views/auth/HomeView.vue";
 import CreateProductView from "@/views/products/CreateProductView.vue";
 import DeleteProductView from "@/views/products/DeleteProductView.vue";
 import DetailProductView from "@/views/products/DetailProductView.vue";
 import EditProductView from "@/views/products/EditProductView.vue";
 import { adminRoute } from "@/models/util/admin-route";
 import { protectedRoute } from "@/models/util/protected-route";
-
+import SomethingWrongView from "@/views/auth/SomethingWrongView.vue";
+import AdminPanelView from "@/views/admin/AdminPanelView.vue";
+import ProductListView from "@/views/products/ProductListView.vue";
+import ProductDetailView from "@/views/products/ProductDetailView.vue";
+import FeatureProductView from "@/views/admin/FeatureProductView.vue";
+import MakeAdminUserView from "@/views/admin/MakeAdminUserView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -67,22 +72,23 @@ const router = createRouter({
       component: SignupView,
     },
     {
+      path: "/something-wrong",
+      name: "something-wrong",
+      component: SomethingWrongView,
+    },
+
+    {
+      path: "/admin-panel",
+      name: "admin-panel",
+      beforeEnter: adminRoute,
+      component: AdminPanelView,
+    },
+
+    {
       path: "/products",
       name: "products",
       beforeEnter: protectedRoute,
       component: ListProductView,
-    },
-    {
-      path: "/products/create",
-      name: "create-product",
-      beforeEnter: adminRoute,
-      component: CreateProductView,
-    },
-    {
-      path: "/products/delete/:id",
-      name: "delete-product",
-      beforeEnter: adminRoute,
-      component: DeleteProductView,
     },
     {
       path: "/products/detail/:id",
@@ -90,17 +96,11 @@ const router = createRouter({
       beforeEnter: protectedRoute,
       component: DetailProductView,
     },
-    {
-      path: "/products/edit/:id",
-      name: "edit-product",
-      beforeEnter: adminRoute,
-      component: EditProductView,
-    },
 
     {
       path: "/users",
       name: "users",
-      beforeEnter: protectedRoute,
+      beforeEnter: adminRoute,
       component: ListUserView,
       children: [
         {
@@ -110,13 +110,68 @@ const router = createRouter({
           component: CreateUserView,
         },
         {
+          path: "make-admin/:id",
+          name: "make-admin-user",
+          beforeEnter: adminRoute,
+          component: MakeAdminUserView,
+        },
+        {
           path: "delete/:id",
           name: "delete-user",
           beforeEnter: adminRoute,
           component: DeleteUserView,
         },
-        { path: "detail/:id", name: "detail-user", component: DetailUserView },
-        { path: "edit/:id", name: "edit-user", component: EditUserView },
+        {
+          path: "detail/:id",
+          name: "detail-user",
+          beforeEnter: protectedRoute,
+          component: DetailUserView,
+        },
+        {
+          path: "edit/:id",
+          name: "edit-user",
+          beforeEnter: adminRoute,
+          component: EditUserView,
+        },
+      ],
+    },
+
+    {
+      path: "/list-product",
+      name: "list-product",
+      beforeEnter: adminRoute,
+      component: ProductListView,
+      children: [
+        {
+          path: "create",
+          name: "product-create",
+          beforeEnter: adminRoute,
+          component: CreateProductView,
+        },
+        {
+          path: "delete/:id",
+          name: "product-delete",
+          beforeEnter: adminRoute,
+          component: DeleteProductView,
+        },
+        {
+          path: "detail/:id",
+          name: "product-detail",
+          beforeEnter: protectedRoute,
+          component: ProductDetailView,
+        },
+        {
+          path: "edit/:id",
+          name: "product-edit",
+          beforeEnter: adminRoute,
+          component: EditProductView,
+        },
+        {
+          path: "feature/:id",
+          name: "product-feature",
+          beforeEnter: adminRoute,
+          component: FeatureProductView,
+        },
       ],
     },
   ],

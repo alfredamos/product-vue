@@ -6,6 +6,7 @@ import { BehaviorSubject } from "rxjs";
 import type ChangePasswordDto from "../models/auth/change-password.model";
 import { AuthApiResponse } from "../models/auth/auth-api-response.model";
 import { UserDetail } from "../models/auth/user-detail.model";
+import type { MakeAdminUserDto } from "@/models/auth/make-admin-user.model";
 
 export const userSubInitial: AuthApiResponse = {
   message: "",
@@ -45,6 +46,13 @@ class AuthService {
     );
 
     return data;
+  }
+
+  async makeAdmin(changeUserRoleDto: MakeAdminUserDto) {
+    return await Axios.patch<AuthApiResponse>(
+      `${this.url}/change-role`,
+      changeUserRoleDto
+    );
   }
 
   getLocalAuthUser(): AuthApiResponse {

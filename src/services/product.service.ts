@@ -1,3 +1,4 @@
+import type FeatureProductDto from "@/models/products/feature-product.model";
 import Axios from "../interceptors/axios.interceptor";
 import { ProductApiResults } from "../models/products/product-api-results.models";
 import ProductDto from "../models/products/product.model";
@@ -39,6 +40,10 @@ export class ProductService {
 
   async deleteProduct(id: string) {
     return await Axios.delete<ProductApiResults>(`${this.url}/${id}`);
+  }
+
+  async editProductFeature(fProductDto: FeatureProductDto){
+    return await Axios.patch<ProductApiResults>(`${this.url}/feature`, fProductDto);
   }
 
   async getAllProducts() {

@@ -24,7 +24,7 @@ const backToList = () => {
 
 <template>
   <div class="row mt-5">
-  <div class="col col-sm-4 col-md-4 offset-4">
+  <div class="col col-sm-8 col-md-8 offset-2">
     <div class="card">
       <form @submit.prevent="submitProduct">
         <div class="card-header bg-primary text-white">

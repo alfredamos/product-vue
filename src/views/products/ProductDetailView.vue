@@ -3,13 +3,13 @@ import { useRoute, useRouter } from "vue-router";
 import { useFetch } from "../../compossables/useFetch";
 import { ProductApiResults } from "../../models/products/product-api-results.models";
 import { computed } from "vue";
-import ProductDisplayOne from "../../components/products/productDisplayOne.vue";
-import { productService } from "../../services/product.service";
+import ProductDisplayOne from "../../components/products/productDisplayOne.vue"
+import { productService } from "@/services/product.service";
 
 const route = useRoute();
-const router = useRouter();
-
 const id = route.params.id as string;
+
+const router = useRouter();
 
 const { resource } = useFetch<ProductApiResults>(`/products/${id}`);
 
@@ -19,14 +19,10 @@ const product = computed(() => {
 
 const deleteProduct = (value: boolean) => {
   if (value) {
-    console.log("deleted, value : ", value);
-    productService
-      .deleteProduct(id)
-      .then((productApiRes) => router.push("/products"))
-      .catch((error) => console.log(error));
+    productService.deleteProduct(id)
+      .then(productApiRes => router.push("/products"))
   } else {
-    console.log("cancelled, value : ", value);
-    router.push("/list-product");
+    router.push("/list-product")
   }
 };
 

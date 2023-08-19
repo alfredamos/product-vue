@@ -34,6 +34,7 @@ const backToList = () => {
         </div>
         <div class="card-footer">
           <button
+          type="button"
             @click="backToList()"
             class="btn-outline-secondary form-control text-center m-1 fw-bold"
           >

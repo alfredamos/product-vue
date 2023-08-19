@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import ProductForm from "@/forms/product/ProductForm.vue";
+import ProductForm from "@/forms/products/ProductForm.vue";
 import ProductDto from "../../models/products/product.model";
-import { ref, computed } from "vue";
+import { computed } from "vue";
 import { useRouter, useRoute } from 'vue-router';
 import { useFetch } from "../../compossables/useFetch";
 import { UserApiResults } from "../../models/users/user-api-results.model";
@@ -37,7 +37,7 @@ const submitProduct = (productDto: ProductDto) => {
 };
 
 const backToList = () => {
-  router.push("/products");
+  router.push("/list-product");
 };
 </script>
 

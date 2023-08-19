@@ -38,6 +38,7 @@ const backToLastPage = () => {
             </div>
             <div class="card-footer bg-white p-4">
               <button
+              type="button"
                 data-bs-toggle="modal"
                 data-bs-target="#exampleModal"
                 class="btn btn-outline-secondary btn-lg form-control fw-bold p-2"
